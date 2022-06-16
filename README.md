@@ -12,6 +12,8 @@ SouqaFintech SDN BHD **IS NOT RESPONSIBLE** for any problems that may arise from
 
 ## Installation
 
+Refer to [this](https://github.com/SouqaFintech/opencart-payhalal-extension/wiki/Installation-Guide) for more detailed installation instructions.
+
 If you have existing plugin, please backup your Opencart folder first.
 
 ![image](https://payhalal.my/assets/images/plugin-extension.jpeg) 
@@ -30,3 +32,6 @@ After you have activated the plugin and created your Payhalal account, head to t
 - Notification URL: https://your-website/index.php?route=extension/payment/payhalal/callback
 - Return URL: https://your-website/index.php?route=extension/payment/payhalal/status
 - Cancel URL: https://your-website/index.php?route=extension/payment/payhalal/status
+
+
+
