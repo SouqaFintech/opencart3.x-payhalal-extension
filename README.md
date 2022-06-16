@@ -12,7 +12,7 @@ SouqaFintech SDN BHD **IS NOT RESPONSIBLE** for any problems that may arise from
 
 ## Installation
 
-Refer to [this](https://github.com/SouqaFintech/opencart-payhalal-extension/wiki/Installation-Guide) for more detailed installation instructions.
+Refer to [this](https://github.com/SouqaFintech/opencart-payhalal-extension/wiki) for more detailed installation instructions.
 
 If you have existing plugin, please backup your Opencart folder first.
 
