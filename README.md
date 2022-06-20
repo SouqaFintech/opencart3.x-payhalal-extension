@@ -1,6 +1,6 @@
 # Payhalal OpenCart Extension
 
-*NOTE: You will need to have Woocommerce installed for this to work.*
+*NOTE: You will need to have Opencart installed for this to work.*
 
 ## Supported Version
 
