@@ -24,7 +24,7 @@ class ControllerExtensionPaymentPayHalal extends Controller {
 
 		$data["order_id"] = $order_info['order_id'];
 
-		$data["product_description"]  = "Order ID ".$order_info['order_id'];
+		$data["product_description"]  = "Opencart Order ID ".$order_info['order_id'];
 
 		$data["customer_name"] 		= $order_info['payment_firstname']." ".$order_info['payment_lastname'];
 		$data["customer_email"] 		= $order_info['email'];
