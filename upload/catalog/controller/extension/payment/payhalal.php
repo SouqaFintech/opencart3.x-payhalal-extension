@@ -47,8 +47,6 @@ class ControllerExtensionPaymentPayHalal extends Controller {
 
   	$post_array = $_POST;
 
-    echo "<pre>";
-
   	$this->language->load('extension/payment/payhalal');
     $this->load->model('checkout/order');
   	$order_info = $this->model_checkout_order->getOrder($post_array['order_id']);
