@@ -3,6 +3,8 @@ class ControllerExtensionPaymentPayHalal extends Controller {
 
   public function index() {
 
+    header('Set-Cookie: ' . $this->config->get('session_name') . '=' . $this->session->getId() . '; SameSite=None; Secure' . '; HttpOnly');
+
     $this->language->load('extension/payment/payhalal');
     $this->load->model('checkout/order');
 		$order_info = $this->model_checkout_order->getOrder($this->session->data['order_id']);
@@ -44,6 +46,9 @@ class ControllerExtensionPaymentPayHalal extends Controller {
   public function status() {
 
   	$post_array = $_POST;
+
+    echo "<pre>";
+
   	$this->language->load('extension/payment/payhalal');
     $this->load->model('checkout/order');
   	$order_info = $this->model_checkout_order->getOrder($post_array['order_id']);
