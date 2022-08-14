@@ -2,6 +2,7 @@
 class ControllerExtensionPaymentPayHalal extends Controller {
 
   public function index() {
+
     $this->language->load('extension/payment/payhalal');
     $this->load->model('checkout/order');
 		$order_info = $this->model_checkout_order->getOrder($this->session->data['order_id']);
@@ -42,62 +43,91 @@ class ControllerExtensionPaymentPayHalal extends Controller {
 	// Redirect to Payment Page
   public function status() {
 
-    if (isset($this->session->data['order_id'])) {
-      $order_id = $this->session->data['order_id'];
-    } else {
-      $order_id = 0;
-    }
-
+  	$post_array = $_POST;
+  	$this->language->load('extension/payment/payhalal');
     $this->load->model('checkout/order');
-    $order_info = $this->model_checkout_order->getOrder($order_id);
+  	$order_info = $this->model_checkout_order->getOrder($post_array['order_id']);
 
-		if ($order_info["order_status_id"] == $this->config->get('payment_payhalal_completed_status_id')) {
-			  $this->response->redirect($this->url->link('checkout/success', '', 'SSL'));
-		}
-		else {
-			  $this->response->redirect($this->url->link('checkout/failure', '', 'SSL'));
-		}
+  	$secret = $this->config->get('payment_payhalal_app_secret');
+    $amount = number_format($order_info['total'],2);
+    $currency = $order_info['currency_code'];
+    $product_description = "Opencart Order ID ".$order_info['order_id'];
+    $order_id = $order_info['order_id'];
+    $customer_name = $order_info['firstname']." ".$order_info['lastname'];
+    $customer_email = $order_info['email'];
+    $customer_phone = $order_info['telephone'];
+    $hash = hash('sha256', $secret.$amount.$currency.$product_description.$order_id. $customer_name . $customer_email . $customer_phone . $post_array['status']);
 
+    if ($hash == $post_array['hash'] && $post_array['amount'] == $amount) {
+    		// echo 1;
+    		$order_status = $this->config->get('config_order_status_id');
+
+    		foreach( $post_array As $r => $o )
+        {
+            $data .= $r . "=" . $o . "<br>";
+        }
+
+    		 if ( $post_array['status'] == "SUCCESS" )  {
+
+                $order_status_id = $this->config->get('payment_payhalal_completed_status_id');
+                $this->model_checkout_order->addOrderHistory($order_id, $order_status_id, $data);
+                $this->response->redirect($this->url->link('checkout/success', '', 'SSL'));
+
+         } else {
+                $order_status_id = $this->config->get('payment_payhalal_failed_status_id');
+                $this->model_checkout_order->addOrderHistory($order_id, $order_status_id, $data);
+                $this->response->redirect($this->url->link('checkout/failure', '', 'SSL'));
+         }
+    }
+    else
+    {
+    	  $this->response->redirect($this->url->link('checkout/failure', '', 'SSL'));
+    }
 
   }
 
 
 	// Server Callback
   public function callback() {
+    $data = "";
+    $post_array = $_POST;
 
-    $postData =  json_encode($_POST);
+  	$this->language->load('extension/payment/payhalal');
+    $this->load->model('checkout/order');
+  	$order_info = $this->model_checkout_order->getOrder($post_array['order_id']);
 
-		$order_id = $_POST["order_id"];
+  	$secret = $this->config->get('payment_payhalal_app_secret');
+    $amount = number_format($order_info['total'],2);
+    $currency = $order_info['currency_code'];
+    $product_description = "Opencart Order ID ".$order_info['order_id'];
+    $order_id = $order_info['order_id'];
+    $customer_name = $order_info['firstname']." ".$order_info['lastname'];
+    $customer_email = $order_info['email'];
+    $customer_phone = $order_info['telephone'];
+    $hash = hash('sha256', $secret.$amount.$currency.$product_description.$order_id. $customer_name . $customer_email . $customer_phone . $post_array['status']);
 
-		$this->load->model('checkout/order');
+    
 
-		$order_info = $this->model_checkout_order->getOrder($order_id);
+    if ($hash == $post_array['hash'] && $post_array['amount'] == $amount) {
+    		// echo 1;
+    	$order_status = $this->config->get('config_order_status_id');
 
+        
 
-		$verify_hash =  hash('sha256',$this->config->get('payment_payhalal_app_secret').number_format($order_info['total'],2,".","").$order_info["currency_code"]."Order ID ".$order_info['order_id'].$order_info['order_id'].$order_info['payment_firstname']." ".$order_info['payment_lastname'].$order_info['email'].$_POST["transaction_id"].
-									  $_POST["status"]);
+    	foreach( $post_array As $r => $o )
+        {
+            $data .= $r . "=" . $o . "<br>";
+        }
 
+    		 if ( $post_array['status'] == "SUCCESS" )  {
 
-		$status = $_POST['status'];
+                $order_status_id = $this->config->get('payment_payhalal_completed_status_id');
+                $this->model_checkout_order->addOrderHistory($order_id, $order_status_id, $data);
 
-		if ($verify_hash != $_POST["hash"]) {
-			$status = "ERROR"; 	$transaction_message = "Hash not valid";
-		}
-
-		$transaction_id = $_POST["transaction_id"];
-
-
-    $this->log->write("Webhook received: $postData");
-
-
-    if ($order_info) {
-
-      if(isset($status) && $status == 'SUCCESS'){
-        $this->model_checkout_order->addOrderHistory($order_id, $this->config->get('payment_payhalal_completed_status_id'), "UID: $transaction_id.  Processor message: SUCCESS", true);
-      }
-      else {
-        $this->model_checkout_order->addOrderHistory($order_id, $this->config->get('payment_payhalal_failed_status_id'), "UID: $transaction_id. Fail reason: ".$status, true);
-      }
+         } else {
+                $order_status_id = $this->config->get('payment_payhalal_failed_status_id');
+                $this->model_checkout_order->addOrderHistory($order_id, $order_status_id, $data);
+         }
     }
   }
 
@@ -105,5 +135,11 @@ class ControllerExtensionPaymentPayHalal extends Controller {
     $lang = substr($lang_id, 0, 2);
     $lang = strtolower($lang);
     return $lang;
+  }
+
+  public function ph_sha256($data, $secret)
+  {
+      $hash = hash('sha256', $secret . $data["amount"] . $data["currency"] . $data["product_description"] . $data["order_id"] . $data["customer_name"] . $data["customer_email"] . $data["customer_phone"] . $data["status"]);
+      return $hash;
   }
 }
