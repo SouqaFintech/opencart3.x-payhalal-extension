@@ -13,15 +13,19 @@ class ControllerExtensionPaymentPayHalal extends Controller {
 
 		if ($this->config->get('payment_payhalal_gw_status') == "LIVE") {
 			  $data['action'] = 'https://api.payhalal.my/pay';
+              $key = $this->config->get('payment_payhalal_app_key');
+              $secret = $this->config->get('payment_payhalal_app_secret');
 		}
 		else {
 			$data['action'] = 'https://api-testing.payhalal.my/pay';
+            $key = $this->config->get('payment_payhalal_app_key_testing');
+            $secret = $this->config->get('payment_payhalal_app_secret_testing');
 		}
 
     $data['button_confirm'] = $this->language->get('button_confirm');
 
-		$data["app_id"] = $this->config->get('payment_payhalal_app_key');
-		$data["secret_key"] = $this->config->get('payment_payhalal_app_secret');
+		$data["app_id"] = $key;
+		$data["secret_key"] = $secret;
 
 		$data["currency"] = $order_info['currency_code'];
 
