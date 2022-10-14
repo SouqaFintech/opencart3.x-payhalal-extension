@@ -48,14 +48,23 @@ class ControllerExtensionPaymentPayHalal extends Controller {
 
 	// Redirect to Payment Page
   public function status() {
-
+	  
+	header('Set-Cookie: ' . $this->config->get('session_name') . '=' . $this->session->getId() . '; SameSite=None; Secure' . '; HttpOnly');
+	
+	if ($this->config->get('payment_payhalal_gw_status') == "LIVE") {
+		$key = $this->config->get('payment_payhalal_app_key');
+		$secret = $this->config->get('payment_payhalal_app_secret');
+	}
+	else {
+		$key = $this->config->get('payment_payhalal_app_key_testing');
+		$secret = $this->config->get('payment_payhalal_app_secret_testing');
+	}
+	  
   	$post_array = $_POST;
 
   	$this->language->load('extension/payment/payhalal');
     $this->load->model('checkout/order');
   	$order_info = $this->model_checkout_order->getOrder($post_array['order_id']);
-
-  	$secret = $this->config->get('payment_payhalal_app_secret');
     $amount = number_format($order_info['total'],2);
     $currency = $order_info['currency_code'];
     $product_description = "Opencart Order ID ".$order_info['order_id'];
