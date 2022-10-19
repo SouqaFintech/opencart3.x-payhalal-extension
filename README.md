@@ -28,8 +28,7 @@ git clone https://github.com/SouqaFintech/opencart-payhalal-extension.git
 
 After you have activated the plugin and created your Payhalal account, head to the Payhalal Merchant Dashboard and click on Developer tools. Add the following URLs:
 
-- Return URL: https://your-website/index.php?route=extension/payment/payhalal/status
-- Notification URL: https://your-website/index.php?route=extension/payment/payhalal/callback
+- Success URL: https://your-website/index.php?route=extension/payment/payhalal/status
 - Return URL: https://your-website/index.php?route=extension/payment/payhalal/status
 - Cancel URL: https://your-website/index.php?route=extension/payment/payhalal/status
 
