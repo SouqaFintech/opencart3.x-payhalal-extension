@@ -1,4 +1,4 @@
-# Payhalal OpenCart Extension
+# Payhalal OpenCart3.x Extension
 
 *NOTE: You will need to have Opencart installed for this to work.*
 
