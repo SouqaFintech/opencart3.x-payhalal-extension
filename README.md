@@ -4,8 +4,8 @@
 
 ## Supported Version
 
-- [x] Opencart version 3.x 
-- [x] Opencart version 3.x (works on Journal Theme)
+- [x] Opencart version 3.x
+- [x] Opencart version 3.x (works on Journal Theme 3.1.8 minimum)
 
 ## Note
 
