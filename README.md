@@ -2,11 +2,6 @@
 
 *NOTE: You will need to have Opencart installed for this to work.*
 
-## Supported Version
-
-- [x] Opencart version 3.x
-- [x] Opencart version 3.x (works on Journal Theme 3.1.8 minimum)
-
 ## Installation
 
 Refer to [this](https://github.com/SouqaFintech/opencart-payhalal-extension/wiki) for more detailed installation instructions.
@@ -22,6 +17,11 @@ If you have existing plugin, please backup your Opencart folder first.
 ```bash
 git clone https://github.com/SouqaFintech/opencart-payhalal-extension.git
 ```
+
+## Supported Version
+
+- [x] Opencart version 3.x
+- [x] Opencart version 3.x (works on Journal Theme 3.1.8 minimum)
 
 After you have activated the plugin and created your Payhalal account, head to the Payhalal Merchant Dashboard and click on Developer tools. Add the following URLs:
 
