@@ -16,8 +16,6 @@
 
 ![image](https://payhalal.my/images/plugin_settings.jpeg) 
 
-![image](https://payhalal.my/assets/images/setup-plugin.jpeg) 
-
 ![image](https://payhalal.my/assets/images/payment-page.jpeg)
 
 After you have activated the plugin and created your Payhalal account, head to the Payhalal Merchant Dashboard and click on Developer tools. Add the following URLs:
