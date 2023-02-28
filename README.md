@@ -4,24 +4,19 @@
 
 ## Installation
 
-Refer to [this](https://github.com/SouqaFintech/opencart-payhalal-extension/wiki) for more detailed installation instructions.
+- Refer to [this](https://github.com/SouqaFintech/opencart-payhalal-extension/wiki) for more detailed installation instructions.
 
-If you have existing plugin, please backup your Opencart folder first.
+- If you have existing plugin, please backup your Opencart folder first.
+
+- Copy the api key either testing or production by login to your <a href='https://merchant.payhalal.my'>merchant dashboard</a>. Go to General > Developer Tools and view the app key and insert the key in the form shown below in your opencart side for payhalal plugin.
+
+- Your can either enable testing or live depends on your need once you finish doing testing, you can enable the plugin to live mode.
 
 ![image](https://payhalal.my/assets/images/plugin-extension.jpeg) 
 
 ![image](https://payhalal.my/assets/images/setup-plugin.jpeg) 
 
 ![image](https://payhalal.my/assets/images/payment-page.jpeg)
-
-```bash
-git clone https://github.com/SouqaFintech/opencart-payhalal-extension.git
-```
-
-## Supported Version
-
-- [x] Opencart version 3.x
-- [x] Opencart version 3.x (works on Journal Theme 3.1.8 minimum)
 
 After you have activated the plugin and created your Payhalal account, head to the Payhalal Merchant Dashboard and click on Developer tools. Add the following URLs:
 
@@ -40,6 +35,15 @@ Refer to the images below:
 - Callback URL: Please leave this blank to avoid any issues
 
 **Replace "your-website" with your shopping cart domain.**
+
+```bash
+git clone https://github.com/SouqaFintech/opencart-payhalal-extension.git
+```
+
+## Supported Version
+
+- [x] Opencart version 3.x
+- [x] Opencart version 3.x (works on Journal Theme 3.1.8 minimum)
 
 ## Note
 
