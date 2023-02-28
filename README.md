@@ -12,6 +12,8 @@
 
 - Your can either enable testing or live depends on your need once you finish doing testing, you can enable the plugin to live mode.
 
+![image](https://payhalal.my/assets/images/plugin_opencart_extensions.jpeg) 
+
 ![image](https://payhalal.my/assets/images/plugin-extension.jpeg) 
 
 ![image](https://payhalal.my/assets/images/setup-plugin.jpeg) 
