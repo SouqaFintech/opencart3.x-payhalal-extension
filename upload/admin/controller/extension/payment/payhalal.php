@@ -36,7 +36,8 @@ class ControllerExtensionPaymentPayHalal extends Controller {
 		//
 		$data['payment_payhalal_app_key'] = $this->language->get('payment_payhalal_app_key');
 		$data['payment_payhalal_app_secret'] = $this->language->get('payment_payhalal_app_secret');
-
+		$data['payment_payhalal_app_key_testing'] = $this->language->get('payment_payhalal_app_key_testing');
+    $data['payment_payhalal_app_secret_testing'] = $this->language->get('payment_payhalal_app_secret_testing');
     $data['entry_email'] = $this->language->get('entry_email');
 
     $data['entry_status'] = $this->language->get('entry_status');
@@ -118,6 +119,18 @@ class ControllerExtensionPaymentPayHalal extends Controller {
 		} else {
 			$data['payment_payhalal_app_secret'] = $this->config->get('payment_payhalal_app_secret');
 		}
+	  
+	    if (isset($this->request->post['payment_payhalal_app_key_testing'])) {
+	      $data['payment_payhalal_app_key_testing'] = $this->request->post['payment_payhalal_app_key_testing'];
+	    } else {
+	      $data['payment_payhalal_app_key_testing'] = $this->config->get('payment_payhalal_app_key_testing');
+	    }
+
+	    if (isset($this->request->post['payment_payhalal_app_secret_testing'])) {
+	      $data['payment_payhalal_app_secret_testing'] = $this->request->post['payment_payhalal_app_secret_testing'];
+	    } else {
+	      $data['payment_payhalal_app_secret_testing'] = $this->config->get('payment_payhalal_app_secret_testing');
+	    }
 
 		if (isset($this->request->post['payment_payhalal_gw_status'])) {
 			$data['payment_payhalal_gw_status'] = $this->request->post['payment_payhalal_gw_status'];
